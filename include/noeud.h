@@ -1,5 +1,5 @@
 struct noeud {
-    bool est_dossier;
+    int est_dossier; // 1 pour true, 0 pour false
     char nom[100];
     struct noeud* pere;
     struct noeud* racine;
