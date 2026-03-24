@@ -4,10 +4,13 @@
 #include "include/noeud.h"
 #include "include/liste_noeud.h"
 
+#include "instruction/print.h"
+
 int main(){
     noeud* noeud_racine;
     noeud_racine = malloc(sizeof(noeud));
     if (noeud_racine == NULL) return -1;
+
 
     noeud_racine->est_dossier = 1;
 
@@ -17,6 +20,8 @@ int main(){
     else {
         printf("le noeud n'est pas un dossier\n");
     }
+
+    print();
 
     return 0;
 }

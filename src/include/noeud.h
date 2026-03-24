@@ -6,4 +6,4 @@ struct noeud {
     struct liste_noeud* fils;
 };
 
-typedef struct noeud noeud ;
+typedef struct noeud noeud;
