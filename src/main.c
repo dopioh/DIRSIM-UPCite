@@ -13,7 +13,11 @@
 int main(int argc, char* argv[]){
     noeud* noeud_racine;
     noeud_racine = malloc(sizeof(noeud));
-    if (noeud_racine == NULL) return -1;
+    if (noeud_racine == NULL) {
+        free(noeud_racine);
+        return -1;
+    }
+    
     noeud_racine->est_dossier = 1;
 
     char* param = argv[1];
