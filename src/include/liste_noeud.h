@@ -3,4 +3,4 @@ struct liste_noeud {
     struct liste_noeud* succ;
 };
 
-typedef struct liste_noeud liste_noeud ;
+typedef struct liste_noeud liste_noeud;
