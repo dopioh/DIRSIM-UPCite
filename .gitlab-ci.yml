@@ -19,7 +19,7 @@ compilation_job:
 test_job:
   stage: test
   script:
-    - ./programme.o
+    - ./programme
   dependencies:
     - compilation_job
 
