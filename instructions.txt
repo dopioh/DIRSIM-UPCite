@@ -1,0 +1,6 @@
+print
+touch
+print
+cat
+mkdir
+ls
