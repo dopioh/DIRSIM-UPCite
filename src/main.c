@@ -6,35 +6,33 @@
 
 #include "include/noeud.h"
 #include "include/liste_noeud.h"
+#include "include/execute.h"
 
-#include "instruction/print.h"
+#define INSTRUCTION_MAX_LEN_STRING 100
 
 
 int main(int argc, char* argv[]){
-    noeud* noeud_racine;
-    noeud_racine = malloc(sizeof(noeud));
-    if (noeud_racine == NULL) {
-        free(noeud_racine);
+    if (argc < 2) {
+        printf(RED "./programme instructions.txt\n" reset);
         return -1;
     }
     
-    noeud_racine->est_dossier = 1;
-
-    char* param = argv[1];
-    if (param == NULL) {
-        printf("erreur dans les arguments...\n");
-        free(noeud_racine);
+    FILE* fichier_instructions;
+    fichier_instructions = fopen(argv[1], "r");
+    if (fichier_instructions == NULL) {
+        printf(RED "erreur lors de l'ouverture du fichier...\n" reset);
         return -1;
     }
 
-    if (strncmp(param, "print", sizeof(param)-1) == 0) {
-        print();
-        free(noeud_racine);
-        return 0;
-    } 
-    else {
-        printf(RED "instruction [ %s ] non-implémentée ...\n" reset, param);
-        free(noeud_racine);
-        return -1;
+    char* instruction_courante = malloc(INSTRUCTION_MAX_LEN_STRING*sizeof(char));
+    if (instruction_courante == NULL) return -1;
+
+    while((instruction_courante = fgets(instruction_courante, INSTRUCTION_MAX_LEN_STRING, fichier_instructions)) != NULL) {
+        execute(instruction_courante);
     }
+
+    printf("\n");
+    free(instruction_courante);
+    fclose(fichier_instructions);
+    return 0;
 }

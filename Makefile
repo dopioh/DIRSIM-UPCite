@@ -1,10 +1,16 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
+BIN_DIR = build/bin
+TARGET = $(BIN_DIR)/programme
 
-SRC = src/main.c src/instruction/*.c
+SRC = src/*.c src/instruction/*.c
 
 main: $(SRC) src/include/*.h src/instruction/*.h
-	$(CC) $(CFLAGS) -o programme $(SRC)
+	mkdir -p $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
 
 clean:
-	rm -f *.o programme
+	rm -f *.o $(TARGET)
+
+run:
+	./build/bin/programme instructions.txt

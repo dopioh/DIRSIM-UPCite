@@ -1,0 +1,30 @@
+image: gcc:latest
+
+stages:
+  - build
+  - test
+  - cleanup
+
+# étape de compilation
+compilation_job:
+  stage: build
+  script:
+    - make
+  artifacts:
+    paths:
+      - "*"  #fichiers générés à l'étape de test
+    expire_in: 1 hour
+
+#exécution/test
+test_job:
+  stage: test
+  script:
+    - make run
+  dependencies:
+    - compilation_job
+
+#etape de nettoyage
+clean_job:
+  stage: cleanup
+  script:
+    - make clean
