@@ -6,10 +6,10 @@
 
 #include "include/noeud.h"
 #include "include/liste_noeud.h"
-
-#include "instruction/print.h"
+#include "include/execute.h"
 
 #define INSTRUCTION_MAX_LEN_STRING 100
+
 
 int main(int argc, char* argv[]){
     if (argc < 2) {
@@ -28,9 +28,11 @@ int main(int argc, char* argv[]){
     if (instruction_courante == NULL) return -1;
 
     while((instruction_courante = fgets(instruction_courante, INSTRUCTION_MAX_LEN_STRING, fichier_instructions)) != NULL) {
-        printf(GRN "%s" reset, instruction_courante);
+        execute(instruction_courante);
     }
 
     printf("\n");
+    free(instruction_courante);
+    fclose(fichier_instructions);
     return 0;
 }
