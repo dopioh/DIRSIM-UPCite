@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -g
 BIN_DIR = build/bin
 TARGET = $(BIN_DIR)/programme
 
@@ -14,3 +14,6 @@ clean:
 
 run:
 	./build/bin/programme instructions.txt
+
+test-mem: $(TARGET)
+	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 ./$(TARGET) instructions.txt
