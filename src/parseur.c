@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "include/color.h"
-
+/**
+ * fonction qui extrait les mots d'une chaine de caractère et le place dans un tableau
+ * utilisée pour récuperer les arguments d'une commande
+ * @return le nombre de mots dans la chaine 
+ */
 
 int parseur(char* instruction, char* args[]) {
     int i = 0;

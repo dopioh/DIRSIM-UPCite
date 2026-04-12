@@ -1,6 +1,12 @@
 #ifndef EXECUTE_H
 #define EXECUTE_H
 
-int execute(char* instruction);
+struct contexte {
+    noeud* noeud_racine;
+    noeud* noeud_courant;
+};
+typedef struct contexte contexte;
+
+int execute(char* instruction, contexte* noeud_courant);
 
 #endif
