@@ -15,7 +15,7 @@ int parseur(char* instruction, char* args[]) {
         while (instruction[i] == ' ') {
             i++;
         }
-        if (instruction[i] == '\0') break;
+        if (instruction[i] == '\0' || instruction[i] == '\n') break;
         if (instruction[i] == '"') {
             i++;
             args[count] = &instruction[i];
@@ -31,7 +31,7 @@ int parseur(char* instruction, char* args[]) {
         else {
             args[count] = &instruction[i];
             count++;
-            while (instruction[i] && instruction[i] != ' ') {
+            while (instruction[i] && instruction[i] != ' ' && instruction[i] != '\n') {
                 i++;
             }
             if (instruction[i]) {
