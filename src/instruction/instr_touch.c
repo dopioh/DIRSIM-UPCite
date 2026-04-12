@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-#include "include/noeud.h"
-#include "include/liste_noeud.h"
+#include "../include/noeud.h"
+#include "../include/liste_noeud.h"
 
 #include "instr_touch.h"
 

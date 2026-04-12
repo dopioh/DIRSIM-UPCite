@@ -47,13 +47,17 @@ int main(int argc, char* argv[]) {
     char* instruction_courante = malloc(INSTRUCTION_MAX_LEN_STRING*sizeof(char));
     if (instruction_courante == NULL) return 1;
 
-    while((instruction_courante = fgets(instruction_courante, INSTRUCTION_MAX_LEN_STRING, fichier_instructions)) != NULL) {
+    while(fgets(instruction_courante, INSTRUCTION_MAX_LEN_STRING, fichier_instructions) != NULL) {
         execute(instruction_courante, ctx);
     }
 
     printf("\n");
-    free(ctx);
+    
     free(instruction_courante);
+    free(ctx);
+    /**
+     * XXX: faire une fonction free_noeud(noeud_racine) qui parcours tout l'arbre et supprime tout les noeuds 
+     */
     fclose(fichier_instructions);
     return 0;
 }

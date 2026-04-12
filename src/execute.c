@@ -21,16 +21,14 @@ int execute(char* instruction, contexte* ctx) {
             print();
         }
     }
-    else if (arg_count == 2) {
+    if (arg_count == 2) {
         if (strcmp(args[0], "touch") == 0) {
-            if (strcmp(args[1], "-") == 1) {
-                instr_touch(args[1], ctx);
-            }
+            /**
+             * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
+             */
+            instr_touch(args[1], ctx); 
         }
     }
-    else {
-        printf(RED "mauvais arguments..." reset);
-        return 1;
-    }
+
     return 0;
 }
