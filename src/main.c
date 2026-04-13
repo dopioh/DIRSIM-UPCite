@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "include/color.h"
-
 #include "include/noeud.h"
 #include "include/liste_noeud.h"
+
 #include "include/execute.h"
+#include "include/clear.h"
+#include "include/color.h"
 
 #define INSTRUCTION_MAX_LEN_STRING 100
 
@@ -55,9 +56,7 @@ int main(int argc, char* argv[]) {
     
     free(instruction_courante);
     free(ctx);
-    /**
-     * XXX: faire une fonction free_noeud(noeud_racine) qui parcours tout l'arbre et supprime tout les noeuds 
-     */
+    clear(noeud_racine);
     fclose(fichier_instructions);
     return 0;
 }
