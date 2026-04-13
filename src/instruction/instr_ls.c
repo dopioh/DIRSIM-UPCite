@@ -26,5 +26,6 @@ int instr_ls(contexte* ctx) {
         ptr = ptr->succ;
     }
     printf("\n");
+    free(ptr);
     return 0;
 }

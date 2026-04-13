@@ -46,6 +46,5 @@ int instr_cd(char* chemin, contexte* ctx) {
             return 1;
         }
     }
-
     return 0;
 }
