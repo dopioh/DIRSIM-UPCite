@@ -9,6 +9,12 @@ ls
 mkdir zeub
 mkdir yellow
 ls
-mkdir yellow
 cd yellow
+mkdir orange
+ls
+cd orange
+mkdir violet
+touch violet
+ls
+cd ../
 ls

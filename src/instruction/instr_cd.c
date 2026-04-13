@@ -32,18 +32,24 @@ int instr_cd(char* chemin, contexte* ctx) {
     
     int trouve = 0;
     while (dossiers_parcourus[i] != NULL) {
-        while (ctx->noeud_courant->fils != NULL) {
-            if (strcmp(dossiers_parcourus[i], ctx->noeud_courant->fils->no->nom) == 0) {
-                ctx->noeud_courant = ctx->noeud_courant->fils->no;
-                trouve = 1;
-                break;
-            }
-            ctx->noeud_courant->fils = ctx->noeud_courant->fils->succ;
+        if (strcmp(dossiers_parcourus[i], "..") == 0) {
+            ctx->noeud_courant = ctx->noeud_courant->pere;
+            i++;
         }
-        i++;
-        if (trouve == 0) {
-            printf(RED "le chemin \"%s\" n'existe pas" reset, chemin);
-            return 1;
+        else {
+            while (ctx->noeud_courant->fils != NULL) {
+                if (strcmp(dossiers_parcourus[i], ctx->noeud_courant->fils->no->nom) == 0) {
+                    ctx->noeud_courant = ctx->noeud_courant->fils->no;
+                    trouve = 1;
+                    break;
+                }
+                ctx->noeud_courant->fils = ctx->noeud_courant->fils->succ;
+            }
+            i++;
+            if (trouve == 0) {
+                printf(RED "le chemin \"%s\" n'existe pas\n" reset, chemin);
+                return 1;
+            }
         }
     }
     return 0;
