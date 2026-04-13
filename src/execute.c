@@ -9,6 +9,9 @@
 
 #include "instruction/print.h"
 #include "instruction/instr_touch.h"
+#include "instruction/instr_mkdir.h"
+#include "instruction/instr_ls.h"
+#include "instruction/instr_cd.h"
 
 #define MAX_ARGS 5
 
@@ -20,13 +23,29 @@ int execute(char* instruction, contexte* ctx) {
         if (strcmp(args[0], "print") == 0) {
             print();
         }
+        if (strcmp(args[0], "ls") == 0) {
+            instr_ls(ctx);
+        }
     }
+
     if (arg_count == 2) {
         if (strcmp(args[0], "touch") == 0) {
             /**
              * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
              */
             instr_touch(args[1], ctx); 
+        }
+        if (strcmp(args[0], "mkdir") == 0) {
+            /**
+             * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
+             */
+            instr_mkdir(args[1], ctx);
+        }
+        if (strcmp(args[0], "cd") == 0) {
+            /**
+             * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
+             */
+            instr_cd(args[1], ctx);
         }
     }
 

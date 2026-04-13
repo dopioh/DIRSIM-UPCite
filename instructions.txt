@@ -1,2 +1,14 @@
-print
 touch hello
+touch hello2
+touch hello3
+touch hello4
+touch helloworld
+mkdir w
+touch .shh
+ls
+mkdir zeub
+mkdir yellow
+ls
+mkdir yellow
+cd yellow
+ls

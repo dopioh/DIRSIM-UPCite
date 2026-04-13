@@ -12,7 +12,7 @@ int instr_touch(char* nom, contexte* ctx) {
     noeud_fichier = malloc(sizeof(noeud));
     if (noeud_fichier == NULL) {
         free(noeud_fichier);
-        return -1;
+        return 1;
     }
 
     noeud_fichier->est_dossier = 0;
