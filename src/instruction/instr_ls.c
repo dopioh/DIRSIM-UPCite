@@ -9,25 +9,22 @@
 #include "instr_ls.h"
 
 int instr_ls(contexte* ctx) {
-    if (ctx->noeud_courant == ctx->noeud_racine) {
-        printf("elements de la racine : \n");
-    }
-    else {
-        printf("elements de %s :", ctx->noeud_courant->nom);
-    }
+    liste_noeud* ptr = ctx->noeud_courant->fils;
 
-    while (ctx->noeud_courant->fils != NULL) {
-        if (ctx->noeud_courant->fils->no->est_dossier == 1) {
-            printf(BLU "/%s\t" reset, ctx->noeud_courant->fils->no->nom );
+    if (ptr == NULL) printf(BLK "(vide)" reset);
+    while (ptr != NULL) {
+        if (ptr->no->est_dossier == 1) {
+            printf(BLU "/%s\t" reset, ptr->no->nom );
         }
-        else if (ctx->noeud_courant->fils->no->nom[0] == '.') {
-            printf(BLK "%s\t" reset, ctx->noeud_courant->fils->no->nom);
+        else if (ptr->no->nom[0] == '.') {
+            printf(BLK "%s\t" reset, ptr->no->nom);
         }
         else {
-            printf("%s\t", ctx->noeud_courant->fils->no->nom);
+            printf("%s\t", ptr->no->nom);
         }
         
-        ctx->noeud_courant->fils = ctx->noeud_courant->fils->succ;
+        ptr = ptr->succ;
     }
+    printf("\n");
     return 0;
 }
