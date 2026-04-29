@@ -12,6 +12,7 @@
 #include "instruction/instr_mkdir.h"
 #include "instruction/instr_ls.h"
 #include "instruction/instr_cd.h"
+#include "instruction/instr_pwd.h"
 
 #define MAX_ARGS 5
 
@@ -25,6 +26,9 @@ int execute(char* instruction, contexte* ctx) {
         }
         if (strcmp(args[0], "ls") == 0) {
             instr_ls(ctx);
+        }
+        if (strcmp(args[0], "pwd") == 0) {
+            instr_pwd(ctx);
         }
     }
 

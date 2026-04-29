@@ -16,5 +16,6 @@ cd orange
 mkdir violet
 touch violet
 ls
+pwd
 cd ../
 ls
