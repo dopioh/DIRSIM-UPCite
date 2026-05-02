@@ -12,4 +12,5 @@ mkdir orange
 cd orange
 mkdir violet
 cd violet
-pwd
+
+find dossier violet
