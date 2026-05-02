@@ -7,11 +7,32 @@
 
 #include "instr_mkdir.h"
 
+// même principe que l'instruction ls
+int dossier_existant(contexte* ctx, char* nom) {
+    liste_noeud* ptr = ctx->noeud_courant->fils;
+
+    if (ptr == NULL) return 1;
+    while (ptr != NULL) {
+        if (ptr->no->est_dossier == 1 && strcmp(ptr->no->nom, nom) == 0) {
+            return 0;
+        }
+        ptr = ptr->succ;
+    }
+    free(ptr);
+    return 1;
+}
+
 int instr_mkdir(char* nom, contexte* ctx) {
     noeud* noeud_dossier;
     noeud_dossier = malloc(sizeof(noeud));
+
     if (noeud_dossier == NULL) {
         free(noeud_dossier);
+        return 1;
+    }
+
+    if (dossier_existant(ctx, nom) == 0) {
+        printf("dossier '%s' existe deja dans ce repertoire...\n", nom);
         return 1;
     }
 

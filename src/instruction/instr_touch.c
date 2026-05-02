@@ -6,12 +6,34 @@
 #include "../include/liste_noeud.h"
 
 #include "instr_touch.h"
+#include "instr_find.h"
+
+// même principe que l'instruction ls
+int fichier_existant(contexte* ctx, char* nom) {
+    liste_noeud* ptr = ctx->noeud_courant->fils;
+
+    if (ptr == NULL) return 1;
+    while (ptr != NULL) {
+        if (ptr->no->est_dossier == 0 && strcmp(ptr->no->nom, nom) == 0) {
+            return 0;
+        }
+        ptr = ptr->succ;
+    }
+    free(ptr);
+    return 1;
+}
 
 int instr_touch(char* nom, contexte* ctx) {
     noeud* noeud_fichier;
+
     noeud_fichier = malloc(sizeof(noeud));
     if (noeud_fichier == NULL) {
         free(noeud_fichier);
+        return 1;
+    }
+
+    if (fichier_existant(ctx, nom) == 0) {
+        printf("fichier '%s' existe deja dans ce repertoire...\n", nom);
         return 1;
     }
 

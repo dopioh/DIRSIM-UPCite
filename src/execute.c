@@ -13,6 +13,7 @@
 #include "instruction/instr_ls.h"
 #include "instruction/instr_cd.h"
 #include "instruction/instr_pwd.h"
+#include "instruction/instr_find.h"
 
 #define MAX_ARGS 5
 
@@ -50,6 +51,12 @@ int execute(char* instruction, contexte* ctx) {
              * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
              */
             instr_cd(args[1], ctx);
+        }
+    }
+
+    if (arg_count == 4) {
+        if (strcmp(args[0], "find") == 0) {
+            instr_find(ctx, args[1], args[2], args[3]);
         }
     }
 
