@@ -52,6 +52,24 @@ int execute(char* instruction, contexte* ctx) {
              */
             instr_cd(args[1], ctx);
         }
+        if (strcmp(args[0], "ls") == 0 && strcmp(args[1], "-a") == 0) {
+            /**
+             * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
+             */
+            instr_ls_cache(ctx);
+        }
+        if ((strcmp(args[0], "ls") == 0) && (strcmp(args[1], "-f") == 0 || strcmp(args[1], "-fichier") == 0)) {
+            /**
+             * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
+             */
+            instr_ls_fichier(ctx);
+        }
+        if (strcmp(args[0], "ls") == 0 && ((strcmp(args[1], "-d") == 0) || strcmp(args[1], "-dossier") == 0)) {
+            /**
+             * XXX: faire une fonction qui verifie si l'argument est un nom ou une option
+             */
+            instr_ls_dossier(ctx);
+        }
     }
 
     if (arg_count == 4) {

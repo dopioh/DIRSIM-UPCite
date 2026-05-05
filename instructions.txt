@@ -4,13 +4,8 @@ touch hello3
 touch hello4
 touch helloworld
 mkdir helloworld
-cd helloworld
-touch test
+touch .hide
 ls
-cd ..
-mkdir orange
-cd orange
-mkdir violet
-cd violet
-
-find dossier violet
+ls -a
+ls -d
+ls -f

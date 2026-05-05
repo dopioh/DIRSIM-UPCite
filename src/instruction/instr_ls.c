@@ -13,6 +13,27 @@ int instr_ls(contexte* ctx) {
 
     if (ptr == NULL) printf(BLK "(vide)" reset);
     while (ptr != NULL) {
+        if (ptr->no->nom[0] != '.') {
+            if (ptr->no->est_dossier == 1) {
+                printf(BLU "/%s\t" reset, ptr->no->nom );
+            }
+            else {
+                printf("%s\t", ptr->no->nom);
+            }
+        }
+        
+        ptr = ptr->succ;
+    }
+    printf("\n");
+    free(ptr);
+    return 0;
+}
+
+int instr_ls_cache(contexte* ctx) {
+    liste_noeud* ptr = ctx->noeud_courant->fils;
+
+    if (ptr == NULL) printf(BLK "(vide)" reset);
+    while (ptr != NULL) {
         if (ptr->no->est_dossier == 1) {
             printf(BLU "/%s\t" reset, ptr->no->nom );
         }
@@ -23,6 +44,36 @@ int instr_ls(contexte* ctx) {
             printf("%s\t", ptr->no->nom);
         }
         
+        ptr = ptr->succ;
+    }
+    printf("\n");
+    free(ptr);
+    return 0;
+}
+
+int instr_ls_fichier(contexte* ctx) {
+    liste_noeud* ptr = ctx->noeud_courant->fils;
+
+    if (ptr == NULL) printf(BLK "(vide)" reset);
+    while (ptr != NULL) {
+        if (ptr->no->est_dossier == 0 && ptr->no->nom[0] != '.') {
+            printf("%s ", ptr->no->nom);
+        }
+        ptr = ptr->succ;
+    }
+    printf("\n");
+    free(ptr);
+    return 0;
+}
+
+int instr_ls_dossier(contexte* ctx) {
+    liste_noeud* ptr = ctx->noeud_courant->fils;
+
+    if (ptr == NULL) printf(BLK "(vide)" reset);
+    while (ptr != NULL) {
+        if (ptr->no->est_dossier == 1) {
+            printf(BLU "/%s\t" reset, ptr->no->nom);
+        }
         ptr = ptr->succ;
     }
     printf("\n");
