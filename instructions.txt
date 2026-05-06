@@ -5,8 +5,10 @@ touch hello4
 touch helloworld
 mkdir helloworld
 touch .hide
+cd helloworld
+touch violet
+cd ..
 ls
-ls -a
-ls -d
-ls -f
-pwd a a a a
+ls /helloworld/
+mkdir test
+ls

@@ -11,7 +11,7 @@
 int instr_cd(char* chemin, contexte* ctx) {
     int i = 0;
     int count = 0;
-    char* dossiers_parcourus[100]; 
+    char* dossiers_parcourus[256]; 
 
     while (chemin[i]) {
         if (chemin[i] == '/') break;

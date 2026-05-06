@@ -9,7 +9,7 @@
 #include "include/clear.h"
 #include "include/color.h"
 
-#define INSTRUCTION_MAX_LEN_STRING 100
+#define INSTRUCTION_MAX_LEN_STRING 256
 
 int main(int argc, char* argv[]) {
     noeud* noeud_racine = malloc(sizeof(noeud));

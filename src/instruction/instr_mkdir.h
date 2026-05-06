@@ -3,6 +3,6 @@
 
 #include "../include/execute.h"
 
-int instr_mkdir(char* nom, contexte* ctx);
+int instr_mkdir(char* chemin, char* nom, contexte* ctx);
 
 #endif

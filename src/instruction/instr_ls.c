@@ -5,12 +5,21 @@
 #include "../include/noeud.h"
 #include "../include/liste_noeud.h"
 #include "../include/color.h"
+#include "../include/recherche_noeud.h"
 
 #include "instr_ls.h"
 
-int instr_ls(contexte* ctx) {
-    liste_noeud* ptr = ctx->noeud_courant->fils;
+noeud* ls_cible(contexte* ctx, char* chemin) {
+    if (ctx == NULL) return NULL;
+    if (chemin == NULL) return ctx->noeud_courant;
+    return recherche_noeud(ctx, chemin);
+}
 
+int instr_ls(contexte* ctx, char* chemin) {
+    noeud* cible = ls_cible(ctx, chemin);
+    if (cible == NULL) return 1;
+
+    liste_noeud* ptr = cible->fils;
     if (ptr == NULL) printf(BLK "(vide)" reset);
     while (ptr != NULL) {
         if (ptr->no->nom[0] != '.') {
@@ -21,16 +30,18 @@ int instr_ls(contexte* ctx) {
                 printf("%s\t", ptr->no->nom);
             }
         }
-        
         ptr = ptr->succ;
     }
     printf("\n");
-    free(ptr);
+
     return 0;
 }
 
-int instr_ls_cache(contexte* ctx) {
-    liste_noeud* ptr = ctx->noeud_courant->fils;
+int instr_ls_cache(contexte* ctx, char* chemin) {
+    noeud* cible = ls_cible(ctx, chemin);
+    if (cible == NULL) return 1;
+
+    liste_noeud* ptr = cible->fils;
 
     if (ptr == NULL) printf(BLK "(vide)" reset);
     while (ptr != NULL) {
@@ -47,12 +58,14 @@ int instr_ls_cache(contexte* ctx) {
         ptr = ptr->succ;
     }
     printf("\n");
-    free(ptr);
     return 0;
 }
 
-int instr_ls_fichier(contexte* ctx) {
-    liste_noeud* ptr = ctx->noeud_courant->fils;
+int instr_ls_fichier(contexte* ctx, char* chemin) {
+    noeud* cible = ls_cible(ctx, chemin);
+    if (cible == NULL) return 1;
+
+    liste_noeud* ptr = cible->fils;
 
     if (ptr == NULL) printf(BLK "(vide)" reset);
     while (ptr != NULL) {
@@ -62,12 +75,14 @@ int instr_ls_fichier(contexte* ctx) {
         ptr = ptr->succ;
     }
     printf("\n");
-    free(ptr);
     return 0;
 }
 
-int instr_ls_dossier(contexte* ctx) {
-    liste_noeud* ptr = ctx->noeud_courant->fils;
+int instr_ls_dossier(contexte* ctx, char* chemin) {
+    noeud* cible = ls_cible(ctx, chemin);
+    if (cible == NULL) return 1;
+
+    liste_noeud* ptr = cible->fils;
 
     if (ptr == NULL) printf(BLK "(vide)" reset);
     while (ptr != NULL) {
@@ -77,6 +92,5 @@ int instr_ls_dossier(contexte* ctx) {
         ptr = ptr->succ;
     }
     printf("\n");
-    free(ptr);
     return 0;
 }

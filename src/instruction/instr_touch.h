@@ -3,6 +3,6 @@
 
 #include "../include/execute.h"
 
-int instr_touch(char* nom, contexte* ctx);
+int instr_touch(char* chemin, char* nom, contexte* ctx);
 
 #endif

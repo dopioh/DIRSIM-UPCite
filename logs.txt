@@ -1,12 +1,14 @@
 touch hello | succes | 0.000003
-touch hello2 | succes | 0.000002
+touch hello2 | succes | 0.000001
 touch hello3 | succes | 0.000001
-touch hello4 | succes | 0.000000
-touch helloworld | succes | 0.000001
-mkdir helloworld | succes | 0.000001
-touch .hide | succes | 0.000001
-ls | succes | 0.000018
-ls -a | succes | 0.000004
-ls -d | succes | 0.000003
-ls -f | succes | 0.000004
-pwd a a a a | echec erreur syntaxe | ...
+touch hello4 | succes | 0.000002
+touch helloworld | succes | 0.000002
+mkdir helloworld | echec | ...
+touch .hide | succes | 0.000002
+cd helloworld | succes | 0.000001
+touch violet | succes | 0.000001
+cd .. | succes | 0.000001
+ls | succes | 0.000005
+ls /helloworld/ | echec | ...
+mkdir test | succes | 0.000001
+ls | succes | 0.000005
