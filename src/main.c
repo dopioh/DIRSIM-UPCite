@@ -45,11 +45,29 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    // creation du fichier logs.txt
+    FILE* fichier_journal;
+    fichier_journal = fopen("logs.txt", "r");
+    if (fichier_journal == NULL) {
+        printf("Le programme a besoin de créer le fichier 'logs.txt' pour inscrire ses journaux.\nAutoriser la création du fichier ? (O/N) : ");
+        char choix;
+        do {
+            scanf(" %c", &choix);
+        }
+        while (choix != 'O' && choix != 'N' && choix != 'o' && choix != 'n');
+        if (choix == 'O' || choix == 'o') {
+            fichier_journal = fopen("logs.txt", "w");
+        }
+    }
+    else { // on supprime les anciens journaux
+        fichier_journal = fopen("logs.txt", "w");
+    }
+
     char* instruction_courante = malloc(INSTRUCTION_MAX_LEN_STRING*sizeof(char));
     if (instruction_courante == NULL) return 1;
 
     while(fgets(instruction_courante, INSTRUCTION_MAX_LEN_STRING, fichier_instructions) != NULL) {
-        execute(instruction_courante, ctx);
+        execute(instruction_courante, ctx, fichier_journal);
     }
 
     printf("\n");
@@ -58,5 +76,6 @@ int main(int argc, char* argv[]) {
     free(ctx);
     clear(noeud_racine);
     fclose(fichier_instructions);
+    fclose(fichier_journal);
     return 0;
 }

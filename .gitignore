@@ -1,3 +1,4 @@
 programme
 .DS_store
 build/*
+logs

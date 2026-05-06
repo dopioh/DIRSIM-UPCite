@@ -7,6 +7,6 @@ struct contexte {
 };
 typedef struct contexte contexte;
 
-int execute(char* instruction, contexte* noeud_courant);
+int execute(char* instruction, contexte* ctx, FILE* fichier_journal);
 
 #endif
