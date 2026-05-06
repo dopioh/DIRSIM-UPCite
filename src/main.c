@@ -60,6 +60,7 @@ int main(int argc, char* argv[]) {
         }
     }
     else { // on supprime les anciens journaux
+        fclose(fichier_journal); // valgrind pas content si on re ouvre sans close
         fichier_journal = fopen("logs.txt", "w");
     }
 
