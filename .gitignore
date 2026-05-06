@@ -1,4 +1,4 @@
 programme
 .DS_store
 build/*
-logs
+logs.txt

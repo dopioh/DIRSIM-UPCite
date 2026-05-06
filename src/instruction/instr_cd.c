@@ -5,52 +5,16 @@
 #include "../include/noeud.h"
 #include "../include/liste_noeud.h"
 #include "../include/color.h"
+#include "../include/recherche_noeud.h"
 
 #include "instr_cd.h"
 
 int instr_cd(char* chemin, contexte* ctx) {
-    int i = 0;
-    int count = 0;
-    char* dossiers_parcourus[256]; 
+    if (ctx == NULL || chemin == NULL) return 1;
 
-    while (chemin[i]) {
-        if (chemin[i] == '/') break;
-        else {
-            dossiers_parcourus[count] = &chemin[i];
-            count++;
-            while (chemin[i] && chemin[i] != '/') {
-                i++;
-            }
-            if (chemin[i]) {
-                chemin[i] = '\0';
-                i++;
-            }
-        }
-    }
-    i = 0;
-    dossiers_parcourus[count] = NULL;
+    noeud* cible = recherche_noeud(ctx, chemin);
+    if (cible == NULL) return 1;
     
-    int trouve = 0;
-    while (dossiers_parcourus[i] != NULL) {
-        if (strcmp(dossiers_parcourus[i], "..") == 0) {
-            ctx->noeud_courant = ctx->noeud_courant->pere;
-            i++;
-        }
-        else {
-            while (ctx->noeud_courant->fils != NULL) {
-                if (strcmp(dossiers_parcourus[i], ctx->noeud_courant->fils->no->nom) == 0) {
-                    ctx->noeud_courant = ctx->noeud_courant->fils->no;
-                    trouve = 1;
-                    break;
-                }
-                ctx->noeud_courant->fils = ctx->noeud_courant->fils->succ;
-            }
-            i++;
-            if (trouve == 0) {
-                printf(RED "le chemin \"%s\" n'existe pas\n" reset, chemin);
-                return 1;
-            }
-        }
-    }
+    ctx->noeud_courant = cible;
     return 0;
 }

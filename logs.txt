@@ -1,14 +1,5 @@
-touch hello | succes | 0.000003
-touch hello2 | succes | 0.000001
-touch hello3 | succes | 0.000001
-touch hello4 | succes | 0.000002
-touch helloworld | succes | 0.000002
-mkdir helloworld | echec | ...
-touch .hide | succes | 0.000002
-cd helloworld | succes | 0.000001
-touch violet | succes | 0.000001
+mkdir a | succes | 0.000004
+cd a | succes | 0.000002
+touch x | succes | 0.000002
 cd .. | succes | 0.000001
-ls | succes | 0.000005
-ls /helloworld/ | echec | ...
-mkdir test | succes | 0.000001
-ls | succes | 0.000005
+ls a | succes | 0.000013
