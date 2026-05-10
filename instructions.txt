@@ -1,14 +1,2 @@
-touch hello
-touch hello2
-touch hello3
-touch hello4
-touch helloworld
-mkdir helloworld
-touch .hide
-cd helloworld
-touch violet
-cd ..
-ls
-ls /helloworld/
-mkdir test
-ls
+cd test3
+pwd

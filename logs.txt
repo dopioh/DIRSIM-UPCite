@@ -1,5 +1,4 @@
-mkdir a | succes | 0.000004
-cd a | succes | 0.000002
-touch x | succes | 0.000002
-cd .. | succes | 0.000001
-ls a | succes | 0.000013
+cd test3 | succes | 0.000012
+pwd | succes | 0.000002
+cd test3 | succes | 0.000006
+pwd | succes | 0.000002
