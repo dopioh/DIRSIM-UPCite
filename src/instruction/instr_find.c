@@ -6,6 +6,7 @@
 #include "../utils/include/liste_noeud.h"
 #include "../utils/include/color.h"
 #include "../utils/include/recherche_noeud.h"
+#include "../utils/include/erreur.h"
 
 #include "instr_find.h"
 
@@ -62,26 +63,24 @@ int instr_find(contexte* ctx, char* chemin, char* type, char* nom) {
     int type_recherche;
 
     if (ctx == NULL || chemin == NULL || type == NULL || nom == NULL) {
-        return 1;
+        return ERR_PARAMETRE_INVALIDE;
     }
 
     type_recherche = parse_type_recherche(type);
     if (type_recherche == -1) {
-        printf(RED "type \"%s\" invalide (attendu: fichier ou dossier)\n" reset, type);
-        return 1;
+        return ERR_TYPE_FIND_INVALIDE;
     }
 
     noeud_depart = recherche_noeud(ctx, chemin);
     if (noeud_depart == NULL) {
-        return 1;
+        return ERR_CHEMIN_INTROUVABLE;
     }
 
     rechercher_recursif(noeud_depart, nom, type_recherche, &nb_resultats);
 
     if (nb_resultats == 0) {
-        printf(BLK "(aucun resultat)\n" reset);
-        return 1;
+        return ERR_AUCUN_RESULTAT;
     }
 
-    return 0;
+    return SUCCESS;
 }

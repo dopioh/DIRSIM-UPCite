@@ -6,7 +6,6 @@
 #include "include/noeud.h"
 #include "include/liste_noeud.h"
 #include "include/execute.h"
-#include "include/color.h"
 #include "include/recherche_noeud.h"
 
 // verifie le chemin donné par l'utilisateur et renvoi le noeud du dossier le plus profond
@@ -20,7 +19,6 @@ noeud* recherche_noeud(contexte* ctx, char* chemin) {
 
     len = strlen(chemin);
     if (len >= sizeof(chemin_copie)) {
-        printf(RED "chemin trop long\n" reset);
         return NULL;
     }
 
@@ -58,7 +56,6 @@ noeud* recherche_noeud(contexte* ctx, char* chemin) {
         }
 
         if (courant->est_dossier == 0) {
-            printf(RED "le chemin \"%s\" ne designe pas un dossier\n" reset, chemin);
             return NULL;
         }
 
@@ -73,7 +70,6 @@ noeud* recherche_noeud(contexte* ctx, char* chemin) {
         }
 
         if (trouve == 0) {
-            printf(RED "le chemin \"%s\" n'existe pas\n" reset, chemin);
             return NULL;
         }
 
@@ -81,7 +77,6 @@ noeud* recherche_noeud(contexte* ctx, char* chemin) {
     }
 
     if (courant->est_dossier == 0) {
-        printf(RED "le chemin \"%s\" ne designe pas un dossier\n" reset, chemin);
         return NULL;
     }
 

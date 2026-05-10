@@ -6,6 +6,7 @@
 #include "../utils/include/liste_noeud.h"
 #include "../utils/include/color.h"
 #include "../utils/include/recherche_noeud.h"
+#include "../utils/include/erreur.h"
 
 #include "instr_ls.h"
 
@@ -17,7 +18,7 @@ noeud* ls_cible(contexte* ctx, char* chemin) {
 
 int instr_ls(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
-    if (cible == NULL) return 1;
+    if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
 
     liste_noeud* ptr = cible->fils;
     if (ptr == NULL) printf(BLK "(vide)" reset);
@@ -34,12 +35,12 @@ int instr_ls(contexte* ctx, char* chemin) {
     }
     printf("\n");
 
-    return 0;
+    return SUCCESS;
 }
 
 int instr_ls_cache(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
-    if (cible == NULL) return 1;
+    if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
 
     liste_noeud* ptr = cible->fils;
 
@@ -58,12 +59,12 @@ int instr_ls_cache(contexte* ctx, char* chemin) {
         ptr = ptr->succ;
     }
     printf("\n");
-    return 0;
+    return SUCCESS;
 }
 
 int instr_ls_fichier(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
-    if (cible == NULL) return 1;
+    if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
 
     liste_noeud* ptr = cible->fils;
 
@@ -75,12 +76,12 @@ int instr_ls_fichier(contexte* ctx, char* chemin) {
         ptr = ptr->succ;
     }
     printf("\n");
-    return 0;
+    return SUCCESS;
 }
 
 int instr_ls_dossier(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
-    if (cible == NULL) return 1;
+    if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
 
     liste_noeud* ptr = cible->fils;
 
@@ -92,5 +93,5 @@ int instr_ls_dossier(contexte* ctx, char* chemin) {
         ptr = ptr->succ;
     }
     printf("\n");
-    return 0;
+    return SUCCESS;
 }

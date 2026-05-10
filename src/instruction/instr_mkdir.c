@@ -5,6 +5,7 @@
 #include "../utils/include/noeud.h"
 #include "../utils/include/liste_noeud.h"
 #include "../utils/include/recherche_noeud.h"
+#include "../utils/include/erreur.h"
 
 #include "instr_mkdir.h"
 
@@ -27,22 +28,21 @@ int noeud_existant_mkdir(noeud* parent, char* nom) {
 }
 
 int instr_mkdir(char* chemin, char* nom, contexte* ctx) {
-    if (ctx == NULL || nom == NULL || nom[0] == '\0') return 1;
+    if (ctx == NULL || nom == NULL || nom[0] == '\0') return ERR_PARAMETRE_INVALIDE;
 
     noeud* parent = mkdir_cible(ctx, chemin);
-    if (parent == NULL) return 1;
+    if (parent == NULL) return ERR_CHEMIN_INTROUVABLE;
 
     noeud* noeud_dossier;
     noeud_dossier = malloc(sizeof(noeud));
 
     if (noeud_dossier == NULL) {
-        return 1;
+        return ERR_ALLOCATION_MEMOIRE;
     }
 
     if (noeud_existant_mkdir(parent, nom) == 0) {
-        printf("l'element '%s' existe deja dans ce repertoire...\n", nom);
         free(noeud_dossier);
-        return 1;
+        return ERR_ELEMENT_DEJA_EXISTANT;
     }
 
     noeud_dossier->est_dossier = 1;
@@ -55,11 +55,11 @@ int instr_mkdir(char* chemin, char* nom, contexte* ctx) {
     liste_noeud* cellule = malloc(sizeof(liste_noeud));
     if (cellule == NULL) {
         free(noeud_dossier);
-        return 1;
+        return ERR_ALLOCATION_MEMOIRE;
     }
     cellule->no = noeud_dossier;
     cellule->succ = parent->fils;
     parent->fils = cellule;
 
-    return 0;
+    return SUCCESS;
 }

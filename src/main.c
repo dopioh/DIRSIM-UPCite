@@ -4,6 +4,7 @@
 
 #include "utils/include/noeud.h"
 #include "utils/include/liste_noeud.h"
+#include "utils/include/erreur.h"
 
 #include "utils/include/execute.h"
 #include "utils/include/clear.h"

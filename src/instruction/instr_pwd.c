@@ -5,6 +5,7 @@
 #include "../utils/include/noeud.h"
 #include "../utils/include/liste_noeud.h"
 #include "../utils/include/color.h"
+#include "../utils/include/erreur.h"
 
 #include "instr_pwd.h"
 
@@ -25,9 +26,9 @@ void print_chemin(noeud* no) {
 }
 
 int instr_pwd(contexte* ctx) {
-    if (ctx == NULL) return 1;
+    if (ctx == NULL) return ERR_PARAMETRE_INVALIDE;
     noeud* no = ctx->noeud_courant;
     print_chemin(no);
     printf("\n");
-    return 0;
+    return SUCCESS;
 }

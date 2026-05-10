@@ -1,5 +1,2 @@
-touch zut
-touch zat
-ls
-mkdir zit
-pwd
+cd introuvable
+touch zig zag zut

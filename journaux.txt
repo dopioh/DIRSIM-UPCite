@@ -1,5 +1,2 @@
-touch zut | succes | 0.000004
-touch zat | succes | 0.000002
-ls | succes | 0.000019
-mkdir zit | succes | 0.000001
-pwd | succes | 0.000004
+cd introuvable | echec | code=1 | chemin introuvable
+touch zig zag zut | echec | code=7 | syntaxe de commande invalide
