@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../include/noeud.h"
-#include "../include/liste_noeud.h"
-#include "../include/recherche_noeud.h"
+#include "../utils/include/noeud.h"
+#include "../utils/include/liste_noeud.h"
+#include "../utils/include/recherche_noeud.h"
 
 #include "instr_mkdir.h"
 

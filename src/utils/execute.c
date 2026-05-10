@@ -8,13 +8,13 @@
 #include "include/execute.h"
 #include "include/parseur.h"
 
-#include "instruction/print.h"
-#include "instruction/instr_touch.h"
-#include "instruction/instr_mkdir.h"
-#include "instruction/instr_ls.h"
-#include "instruction/instr_cd.h"
-#include "instruction/instr_pwd.h"
-#include "instruction/instr_find.h"
+#include "../instruction/print.h"
+#include "../instruction/instr_touch.h"
+#include "../instruction/instr_mkdir.h"
+#include "../instruction/instr_ls.h"
+#include "../instruction/instr_cd.h"
+#include "../instruction/instr_pwd.h"
+#include "../instruction/instr_find.h"
 
 #define MAX_ARGS 5
 

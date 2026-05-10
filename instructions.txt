@@ -1,2 +1,5 @@
-cd test3
+touch zut
+touch zat
+ls
+mkdir zit
 pwd

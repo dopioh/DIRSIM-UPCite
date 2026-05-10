@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "include/noeud.h"
-#include "include/liste_noeud.h"
+#include "utils/include/noeud.h"
+#include "utils/include/liste_noeud.h"
 
-#include "include/execute.h"
-#include "include/clear.h"
-#include "include/color.h"
+#include "utils/include/execute.h"
+#include "utils/include/clear.h"
+#include "utils/include/color.h"
 
 #define INSTRUCTION_MAX_LEN_STRING 256
 

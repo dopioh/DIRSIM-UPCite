@@ -1,4 +1,0 @@
-cd test3 | succes | 0.000012
-pwd | succes | 0.000002
-cd test3 | succes | 0.000006
-pwd | succes | 0.000002

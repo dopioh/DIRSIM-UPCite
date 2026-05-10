@@ -3,9 +3,9 @@ CFLAGS = -Wall -Wextra -g
 BIN_DIR = build/bin
 TARGET = $(BIN_DIR)/programme
 
-SRC = src/*.c src/instruction/*.c
+SRC = src/*.c src/utils/*c src/instruction/*.c
 
-main: $(SRC) src/include/*.h src/instruction/*.h
+main: $(SRC) src/utils/include/*.h src/instruction/*.h
 	mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
 

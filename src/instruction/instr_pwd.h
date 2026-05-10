@@ -1,7 +1,7 @@
 #ifndef INSTR_PWD
 #define INSTR_PWD
 
-#include "../include/execute.h"
+#include "../utils/include/execute.h"
 
 int instr_pwd(contexte* ctx);
 

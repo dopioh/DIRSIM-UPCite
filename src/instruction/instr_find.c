@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/noeud.h"
-#include "../include/liste_noeud.h"
-#include "../include/color.h"
-#include "../include/recherche_noeud.h"
+#include "../utils/include/noeud.h"
+#include "../utils/include/liste_noeud.h"
+#include "../utils/include/color.h"
+#include "../utils/include/recherche_noeud.h"
 
 #include "instr_find.h"
 
