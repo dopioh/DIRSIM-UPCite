@@ -1,0 +1,2 @@
+cd introuvable | echec | code=1 | chemin introuvable
+touch zig zag zut | echec | code=7 | syntaxe de commande invalide

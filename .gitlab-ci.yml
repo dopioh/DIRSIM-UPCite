@@ -5,7 +5,6 @@ stages:
   - test
   - cleanup
 
-# étape de compilation
 compilation_job:
   stage: build
   script:
@@ -15,15 +14,16 @@ compilation_job:
       - "*"  #fichiers générés à l'étape de test
     expire_in: 1 hour
 
-#exécution/test
 test_job:
   stage: test
+  before_script:
+    - apt-get update -y
+    - apt-get install -y valgrind
   script:
-    - make run
+    - make test-mem
   dependencies:
     - compilation_job
 
-#etape de nettoyage
 clean_job:
   stage: cleanup
   script:
