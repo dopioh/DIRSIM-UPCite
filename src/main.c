@@ -97,7 +97,9 @@ int main(int argc, char* argv[]) {
 
         char ligne[INSTRUCTION_MAX_LEN_STRING];
         while (fgets(ligne, sizeof(ligne), fichier_instr) != NULL) {
-            fputs(ligne, sauvegarde);
+            if (strncmp(ligne, "cd", 2) == 0 || strncmp(ligne, "touch", 5) == 0 || strncmp(ligne, "mkdir", 5) == 0 || strncmp(ligne, "cp", 2) == 0 || strncmp(ligne, "rm", 1) == 0) { // la sauvegarde ne save que les instructions cd, mkdir, touch, cp et rm
+                fputs(ligne, sauvegarde);
+            }
         }
 
         fclose(fichier_instr);
