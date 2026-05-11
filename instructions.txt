@@ -1,2 +1,8 @@
 cd introuvable
 touch zig zag zut
+touch zig
+touch zag
+mkdir test1
+touch test1 zozo
+ls
+ls test1

@@ -17,7 +17,7 @@
 
 #define ERR_SYNTAXE_COMMANDE      7 // quand on a pas le bon nb de parametre
 
-#define ERR_PARAMETRE_INVALIDE    8 // quand un parametre est null
+#define ERR_PARAMETRE_INVALIDE    8 // quand un parametre est null/trop gros/caracteres interdits
 
 #define ERR_ALLOCATION_MEMOIRE    9
 

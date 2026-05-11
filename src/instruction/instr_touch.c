@@ -9,6 +9,19 @@
 
 #include "instr_touch.h"
 
+int nom_fichier_valide(char* nom) {
+    int i = 0;
+    if (nom == NULL || nom[0] == '\0') return 0;
+    while (nom[i] != '\0') {
+        char c = nom[i];
+        if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
+            return 0;
+        }
+        i++;
+    }
+    return i <= 99;
+}
+
 noeud* touch_cible(contexte* ctx, char* chemin) {
     if (ctx == NULL) return NULL;
     if (chemin == NULL) return ctx->noeud_courant;
@@ -29,6 +42,7 @@ int noeud_existant_touch(noeud* parent, char* nom) {
 
 int instr_touch(char* chemin, char* nom, contexte* ctx) {
     if (ctx == NULL || nom == NULL || nom[0] == '\0') return ERR_PARAMETRE_INVALIDE;
+    if (!nom_fichier_valide(nom)) return ERR_PARAMETRE_INVALIDE;
 
     noeud* parent = touch_cible(ctx, chemin);
     if (parent == NULL) return ERR_CHEMIN_INTROUVABLE;
