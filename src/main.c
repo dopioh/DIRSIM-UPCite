@@ -113,15 +113,30 @@ int main(int argc, char* argv[]) {
         executer_fichier(ctx, argv[3], fichier_journal); // exec du fichier courant
     }
     else {
-        printf(RED "mauvais arguments...\n" reset);
+        printf(RED "./programme [-S/-L] [nom sauvegarde] instructions.txt\n" reset);
+        if (ctx != NULL) {
+            free(ctx);
+        }
+        if (noeud_racine != NULL) {
+            clear(noeud_racine);
+        }
+        if (fichier_journal) {
+            fclose(fichier_journal);
+        }
         return 1;
     }
 
 
     printf("\n");
     
-    free(ctx);
-    clear(noeud_racine);
-    fclose(fichier_journal);
+    if (ctx != NULL) {
+        free(ctx);
+    }
+    if (noeud_racine != NULL) {
+        clear(noeud_racine);
+    }
+    if (fichier_journal) {
+        fclose(fichier_journal);
+    }
     return 0;
 }

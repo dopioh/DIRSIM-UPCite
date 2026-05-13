@@ -1,8 +1,0 @@
-cd introuvable | echec | code=1 | chemin introuvable
-touch zig zag zut | echec | code=7 | syntaxe de commande invalide
-touch zig | succes | 0.000001
-touch zag | succes | 0.000001
-mkdir test1 | succes | 0.000000
-touch test1 zozo | succes | 0.000002
-ls | succes | 0.000003
-ls test1 | succes | 0.000002
