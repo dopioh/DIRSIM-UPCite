@@ -12,11 +12,13 @@
 #include "../instruction/print.h"
 #include "../instruction/instr_touch.h"
 #include "../instruction/instr_mkdir.h"
+#include "../instruction/instr_cp.h"
 #include "../instruction/instr_ls.h"
 #include "../instruction/instr_cd.h"
 #include "../instruction/instr_pwd.h"
 #include "../instruction/instr_find.h"
 #include "../instruction/instr_rm.h"
+#include "../instruction/instr_cp.h"
 
 #define MAX_ARGS 5
 
@@ -111,6 +113,9 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
             case 'c':
                 if (strcmp(args[0], "cd") == 0) {
                     if (arg_count == 2) erreur = instr_cd(args[1], ctx);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else if (strcmp(args[0], "cp") == 0) {
+                    if (arg_count == 3) erreur = instr_cp(args[1], args[2], ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;

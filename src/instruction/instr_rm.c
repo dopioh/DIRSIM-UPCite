@@ -77,7 +77,7 @@ int instr_rm(char* chemin, contexte* ctx) {
     }
 
     if (ctx->noeud_courant != NULL && noeud_dans_sous_arbre(cible, ctx->noeud_courant)) {
-        ctx->noeud_courant = parent;
+        return ERR_PARAMETRE_INVALIDE;
     }
 
     if (supprimer_cellule_fils(parent, cible) == 0) {
