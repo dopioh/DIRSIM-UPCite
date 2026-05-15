@@ -19,6 +19,7 @@
 #include "../instruction/instr_find.h"
 #include "../instruction/instr_rm.h"
 #include "../instruction/instr_cp.h"
+#include "../instruction/instr_mv.h"
 
 #define MAX_ARGS 5
 
@@ -105,6 +106,10 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
                         erreur = instr_mkdir(NULL, args[1], ctx);
                     } else if (arg_count == 3) {
                         erreur = instr_mkdir(args[1], args[2], ctx);
+                    } else erreur = ERR_SYNTAXE_COMMANDE;
+                } else if (strcmp(args[0], "mv") == 0) {
+                    if (arg_count == 3) {
+                        erreur = instr_mv(args[1], args[2], ctx);
                     } else erreur = ERR_SYNTAXE_COMMANDE;
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;
