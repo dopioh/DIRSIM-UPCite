@@ -6,3 +6,9 @@ mkdir test1
 touch test1 zozo
 ls
 ls test1
+cp test1 cp
+mkdir rm 
+ls 
+ls cp
+rm rm
+ls
