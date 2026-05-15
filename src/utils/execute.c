@@ -16,6 +16,7 @@
 #include "../instruction/instr_cd.h"
 #include "../instruction/instr_pwd.h"
 #include "../instruction/instr_find.h"
+#include "../instruction/instr_rm.h"
 
 #define MAX_ARGS 5
 
@@ -148,6 +149,14 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
             case 'f':
                 if (strcmp(args[0], "find") == 0) {
                     if (arg_count == 4) erreur = instr_find(ctx, args[1], args[2], args[3]);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else {
+                    erreur = ERR_COMMANDE_INCONNUE;
+                }
+                break;
+            case 'r':
+                if (strcmp(args[0], "rm") == 0) {
+                    if (arg_count == 2) erreur = instr_rm(args[1], ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;
