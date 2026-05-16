@@ -76,9 +76,5 @@ noeud* recherche_noeud(contexte* ctx, char* chemin) {
         token = strtok(NULL, "/"); // on passe au prochain dossier
     }
 
-    if (courant->est_dossier == 0) {
-        return NULL;
-    }
-
     return courant;
 }
