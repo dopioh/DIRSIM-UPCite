@@ -9,7 +9,7 @@
 #include "include/parseur.h"
 #include "include/erreur.h"
 
-#include "../instruction/print.h"
+#include "../instruction/instr_print.h"
 #include "../instruction/instr_touch.h"
 #include "../instruction/instr_mkdir.h"
 #include "../instruction/instr_cp.h"
@@ -80,7 +80,7 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
         switch (args[0][0]) { // on peut pas switch avec un string
             case 'p':
                 if (strcmp(args[0], "print") == 0) {
-                    if (arg_count == 1) print();
+                    if (arg_count == 1) erreur = instr_print(ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else if (strcmp(args[0], "pwd") == 0) {
                     if (arg_count == 1) erreur = instr_pwd(ctx);
