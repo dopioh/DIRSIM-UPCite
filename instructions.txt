@@ -13,3 +13,6 @@ ls
 ls cp
 rm rm
 ls
+mv cpzig cp/cpzig2
+ls
+ls cp
