@@ -11,7 +11,11 @@
 #include "instr_cd.h"
 
 int instr_cd(char* chemin, contexte* ctx) {
-    if (ctx == NULL || chemin == NULL) return ERR_PARAMETRE_INVALIDE;
+    if (ctx == NULL) return ERR_PARAMETRE_INVALIDE;
+    
+    if (chemin == NULL || chemin[0] == '\0') {
+        chemin = "/";
+    }
 
     noeud* cible = recherche_noeud(ctx, chemin);
     if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;

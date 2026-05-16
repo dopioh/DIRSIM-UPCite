@@ -63,6 +63,8 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
     instruction_log[sizeof(instruction_log) - 1] = '\0';
     instruction_log[strcspn(instruction_log, "\n")] = '\0'; // strcspn renvoi l'indice du premier \n ce qui permet de le remplacer par \0 pour finir la ligne
 
+    instruction[strcspn(instruction, "\r\n")] = '\0';
+
     char* args[MAX_ARGS];
     int arg_count = parseur(instruction, args, MAX_ARGS);
     int erreur = SUCCESS;
@@ -117,7 +119,8 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
                 break;
             case 'c':
                 if (strcmp(args[0], "cd") == 0) {
-                    if (arg_count == 2) erreur = instr_cd(args[1], ctx);
+                    if (arg_count == 1) erreur = instr_cd(NULL, ctx);
+                    else if (arg_count == 2) erreur = instr_cd(args[1], ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else if (strcmp(args[0], "cp") == 0) {
                     if (arg_count == 3) erreur = instr_cp(args[1], args[2], ctx);
