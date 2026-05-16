@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
         char nom_sauvegarde[256];
         do {
             printf("entrer un nom de sauvegarde (alphanumerique): ");
-            scanf("%s", nom_sauvegarde);
+            scanf("%255s", nom_sauvegarde);
         }
         while (nom_correct(nom_sauvegarde) != 0);
         
