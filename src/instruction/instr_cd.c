@@ -15,6 +15,7 @@ int instr_cd(char* chemin, contexte* ctx) {
 
     noeud* cible = recherche_noeud(ctx, chemin);
     if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
+    if (cible->est_dossier == 0) return ERR_CHEMIN_INTROUVABLE;
 
     ctx->noeud_courant = cible;
     return SUCCESS;
