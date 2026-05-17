@@ -22,7 +22,7 @@ int parseur(char* instruction, char* args[], int max_args) {
             i++;
             if (count >= max_args - 1) {
                 args[max_args - 1] = NULL;
-                return 1;
+                return max_args;
             }
             args[count] = &instruction[i];
             count++;
@@ -37,7 +37,7 @@ int parseur(char* instruction, char* args[], int max_args) {
         else {
             if (count >= max_args - 1) {
                 args[max_args - 1] = NULL;
-                return 11;
+                return max_args;
             }
             args[count] = &instruction[i];
             count++;

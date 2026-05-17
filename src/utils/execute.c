@@ -249,5 +249,5 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
         history_ajouter(instruction_log);
     }
 
-    return 0;
+    return erreur;
 }

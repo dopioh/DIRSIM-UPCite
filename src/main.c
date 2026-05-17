@@ -46,6 +46,7 @@ int main(int argc, char* argv[]) {
     contexte* ctx = malloc(sizeof(contexte));
     if (ctx == NULL) {
         free(ctx);
+        free(noeud_racine);
         return 1;
     }
     ctx->noeud_racine = noeud_racine;
