@@ -1,6 +1,7 @@
 # c-dirsim
 
 Simulateur de système de fichiers en C.
+Ecrit par MAZRI Nassim & WU Billy
 
 ## Prérequis
 
