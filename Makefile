@@ -21,4 +21,4 @@ run-file: $(TARGET)
 	$(RUN_CMD) instructions.txt
 
 test-mem: $(TARGET)
-	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 ./$(TARGET) instructions.txt
+	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 ./$(TARGET) tests/test_07.txt

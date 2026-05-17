@@ -1,5 +1,0 @@
-mkdir loaded
-touch fromload
-cd loaded
-touch inside
-cd /

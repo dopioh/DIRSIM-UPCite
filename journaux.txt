@@ -1,7 +1,0 @@
-mkdir projet | succes | 0.000002
-cd projet | succes | 0.000002
-touch main | succes | 0.000001
-touch readme | succes | 0.000001
-ls | succes | 0.000008
-pwd | succes | 0.000002
-print | succes | 0.000008
