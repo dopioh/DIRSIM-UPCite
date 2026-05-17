@@ -79,6 +79,21 @@ int main(int argc, char* argv[]) {
     if (argc == 2) {
         executer_fichier(ctx, argv[1], fichier_journal);
     }
+    else if (argc == 1) {
+        char instruction[INSTRUCTION_MAX_LEN_STRING];
+        printf("Tapez 'exit' pour quitter.\n");
+        while (1) {
+            printf("> ");
+            fflush(stdout);
+            if (fgets(instruction, INSTRUCTION_MAX_LEN_STRING, stdin) == NULL) {
+                break;
+            }
+            if (strncmp(instruction, "exit", 4) == 0 && (instruction[4] == '\0' || instruction[4] == '\n' || instruction[4] == ' ')) {
+                break;
+            }
+            execute(instruction, ctx, fichier_journal);
+        }
+    }
     else if (argc == 3 && (strcmp(argv[1], "-S") == 0)) {
         char nom_sauvegarde[256];
         do {
