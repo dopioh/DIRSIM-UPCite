@@ -1,0 +1,7 @@
+mkdir h1
+touch h2
+cd h1
+touch h3
+cd /
+history
+save tests/out_history_06.txt

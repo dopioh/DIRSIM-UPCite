@@ -1,97 +1,82 @@
 # c-dirsim
 
-Simulateur de commandes de type système de fichiers, écrit en C par MAZRI Nassim et WU Billy.
+Simulateur de système de fichiers en C.
+Ecrit par MAZRI Nassim & WU Billy
 
-## Prerequis
+## Prérequis
 
-- Compilateur C
-- Commande `make`
-- Commande `valgrind`
+- `gcc`
+- `make`
+- `valgrind`
 
-## Compiler le projet
-
-La compilation se fait avec:
+## Compilation
 
 ```bash
 make
 ```
 
-`make` lance la commande `main` du `Makefile`:
+Génère l'exécutable:
 
-- création du dossier `build/bin` (si il n'existe pas déjà)
-- compile les fichiers `.c` du projet
-- genere l'executable `build/bin/programme`
-
-## Lancer le programme
-
-Pour executer le binaire avec le fichier d'instructions:
-
-```bash
-make run
+```text
+build/bin/programme
 ```
 
-La commande lance:
+## Exécution
+
+Mode interactif:
+
+```bash
+./build/bin/programme
+```
+
+Mode fichier d'instructions:
 
 ```bash
 ./build/bin/programme instructions.txt
 ```
-> si votre le fichier d'instruction ne s'appelle pas ```instructions.txt```, executer le programme sans ```make run``` et avec le bon nom de votre fichier d'instruction
+
+
+## Commandes Make utiles
+
+```bash
+make            # compile
+make run        # lance en mode intéractif
+make clean      # supprime l'exécutable
+make test-mem   # execute la commande valgrind du sujet
+```
 
 ## Commandes disponibles
 
-```text
-print
-pwd
-cd <chemin>
-touch <nom>
-touch <chemin> <nom>
-mkdir <nom>
-mkdir <chemin> <nom>
-ls
-ls <chemin>
-ls -f
-ls -f <chemin>
-ls -fichier
-ls -fichier <chemin>
-ls -d
-ls -d <chemin>
-ls -dossier
-ls -dossier <chemin>
-find <chemin> <fichier|dossier> <nom>
-```
+| Commande | Syntaxe | Explication |
+|---|---|---|
+| `print` | `print` | Affiche toute l'arborescence. |
+| `pwd` | `pwd` | Affiche le chemin du dossier courant. |
+| `cd` | `cd` ou `cd <chemin>` | Change le dossier courant. Sans argument, va à la racine `/`. |
+| `mkdir` | `mkdir <nom>` ou `mkdir <chemin> <nom>` | Crée un dossier. |
+| `touch` | `touch <nom>` ou `touch <chemin> <nom>` | Crée un fichier. |
+| `ls` | `ls`, `ls <chemin>`, `ls -f [<chemin>]`, `ls -fichier [<chemin>]`, `ls -d [<chemin>]`, `ls -dossier [<chemin>]` | Liste le contenu d'un dossier avec filtres. |
+| `find` | `find <nom>` ou `find <chemin> <fichier\|dossier> <nom>` | Recherche un nom et affiche les chemins trouvés. |
+| `cp` | `cp <source> <destination>` | Copie un fichier ou un dossier (récursif pour dossier). |
+| `mv` | `mv <source> <destination>` | Déplace ou renomme un fichier/dossier. |
+| `rm` | `rm <chemin>` | Supprime un fichier/dossier (récursif pour dossier). |
+| `history` | `history` | Affiche l'historique des commandes. |
+| `save` | `save <fichier>` | Sauvegarde les commandes déjà executées (et qui impactent l'arborescence). |
+| `load` | `load <fichier>` | Exécute les commandes contenues dans un fichier. |
+| `man` | `man` ou `man <commande>` | Affiche l'aide générale ou le manuel d'une commande. |
 
 
-- Les noms pour `touch` et `mkdir` sont alphanumeriques uniquement (`a-z`, `A-Z`, `0-9`).
-- Les noms pour `touch` et `mkdir` sont limites a 99 caracteres.
-- Les chemins peuvent etre absolus (`/a/b`) ou relatifs (`a/b`, `.`, `..`).
+## Jeu de tests
 
-## Nettoyer les fichiers de build
-
-Pour supprimer le dernier executable:
+Un dossier `tests/` contient des fichiers d'instructions prêts à lancer:
 
 ```bash
-make clean
+./build/bin/programme tests/test_01.txt
 ```
 
-## Verification memoire (avec Valgrind)
-Tester le programme avec la commande Valgrind du sujet
-```bash
-make test-mem
-```
+## Ressources
 
-
-## Compilation manuelle
-
-Pour compiler sans ```make```
-
-```bash
-gcc -Wall -Wextra -g -o build/bin/programme src/*.c src/utils/*.c src/instruction/*.c
-```
-
-## Ressources utilisées
-- [Chronometre C (Developpez)](https://c.developpez.com/faq/?page=Gestion-des-dates-et-heures) | pour le temps d'éxécution des commandes dans les journaux
-
-- [Couleurs ASCII (Gist)](https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a) | pour les différentes couleurs sur les sorties du programme
-
-- [Documentation C (ibm.com)](https://ibm.com) et [Documentation C (koor.fr)](https://koor.fr/)
-
+- [Chronomètre C (Developpez)](https://c.developpez.com/faq/?page=Gestion-des-dates-et-heures)
+- [Couleurs ANSI (Gist)](https://gist.github.com/RabaDabaDoba/145049536f815903c79944599c6f952a)
+- [Documentation C (IBM)](https://ibm.com)
+- [Documentation C (koor.fr)](https://koor.fr/)
+- [Makefile (UCLouvain)](https://sites.uclouvain.be/SystInfo/notes/Outils/make.html)

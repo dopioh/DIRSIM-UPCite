@@ -19,6 +19,7 @@ noeud* ls_cible(contexte* ctx, char* chemin) {
 int instr_ls(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
     if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
+    if (cible->est_dossier == 0) return ERR_PARAMETRE_INVALIDE;
 
     liste_noeud* ptr = cible->fils;
     if (ptr == NULL) printf(BLK "(vide)" reset);
@@ -41,6 +42,7 @@ int instr_ls(contexte* ctx, char* chemin) {
 int instr_ls_cache(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
     if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
+    if (cible->est_dossier == 0) return ERR_PARAMETRE_INVALIDE;
 
     liste_noeud* ptr = cible->fils;
 
@@ -65,6 +67,7 @@ int instr_ls_cache(contexte* ctx, char* chemin) {
 int instr_ls_fichier(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
     if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
+    if (cible->est_dossier == 0) return ERR_PARAMETRE_INVALIDE;
 
     liste_noeud* ptr = cible->fils;
 
@@ -82,6 +85,7 @@ int instr_ls_fichier(contexte* ctx, char* chemin) {
 int instr_ls_dossier(contexte* ctx, char* chemin) {
     noeud* cible = ls_cible(ctx, chemin);
     if (cible == NULL) return ERR_CHEMIN_INTROUVABLE;
+    if (cible->est_dossier == 0) return ERR_PARAMETRE_INVALIDE;
 
     liste_noeud* ptr = cible->fils;
 

@@ -12,8 +12,13 @@ main: $(SRC) src/utils/include/*.h src/instruction/*.h
 clean:
 	rm -f *.o $(TARGET)
 
-run:
-	./build/bin/programme instructions.txt
+.PHONY: run run-file
+
+run: $(TARGET)
+	./build/bin/programme
+
+run-file: $(TARGET)
+	$(RUN_CMD) instructions.txt
 
 test-mem: $(TARGET)
-	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 ./$(TARGET) instructions.txt
+	valgrind --leak-check=full --show-leak-kinds=all --error-exitcode=1 ./$(TARGET) tests/test_07.txt

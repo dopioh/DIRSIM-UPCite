@@ -46,6 +46,7 @@ int instr_touch(char* chemin, char* nom, contexte* ctx) {
 
     noeud* parent = touch_cible(ctx, chemin);
     if (parent == NULL) return ERR_CHEMIN_INTROUVABLE;
+    if (parent->est_dossier == 0) return ERR_PARAMETRE_INVALIDE;
 
     noeud* noeud_fichier;
 

@@ -1,0 +1,7 @@
+mkdir projet
+cd projet
+touch main
+touch readme
+ls
+pwd
+print

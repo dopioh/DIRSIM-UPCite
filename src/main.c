@@ -12,19 +12,6 @@
 
 #define INSTRUCTION_MAX_LEN_STRING 256
 
-int nom_correct(char* nom) { // sert a choisir un nom valide pour la sauvegarde
-    int i = 0;
-    if (nom[0] == '\0') return 1;
-    while (nom[i] != '\0') {
-        char c = nom[i];
-        if (!((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))) {
-            return 1;
-        }
-        i++;
-    }
-    return 0;
-}
-
 int executer_fichier(contexte* ctx, char* chemin, FILE* journal) {
     FILE* fichier_instr = fopen(chemin, "r");
     if (fichier_instr == NULL) {
@@ -64,7 +51,7 @@ int main(int argc, char* argv[]) {
     ctx->noeud_racine = noeud_racine;
     ctx->noeud_courant = noeud_racine;
 
-    // creation du fichier logs.txt
+    // creation du fichier journaux.txt
     FILE* fichier_journal;
     fichier_journal = fopen("journaux.txt", "r");
     
@@ -79,41 +66,23 @@ int main(int argc, char* argv[]) {
     if (argc == 2) {
         executer_fichier(ctx, argv[1], fichier_journal);
     }
-    else if (argc == 3 && (strcmp(argv[1], "-S") == 0)) {
-        char nom_sauvegarde[256];
-        do {
-            printf("entrer un nom de sauvegarde (alphanumerique): ");
-            scanf("%255s", nom_sauvegarde);
-        }
-        while (nom_correct(nom_sauvegarde) != 0);
-        
-        FILE* fichier_instr = fopen(argv[2], "r");
-        if (fichier_instr == NULL) return 1;
-
-        FILE* sauvegarde = fopen(nom_sauvegarde, "w");
-        if (sauvegarde == NULL) {
-            fclose(fichier_instr);
-            return 1;
-        }
-
-        char ligne[INSTRUCTION_MAX_LEN_STRING];
-        while (fgets(ligne, sizeof(ligne), fichier_instr) != NULL) {
-            if (strncmp(ligne, "cd", 2) == 0 || strncmp(ligne, "touch", 5) == 0 || strncmp(ligne, "mkdir", 5) == 0 || strncmp(ligne, "cp", 2) == 0 || strncmp(ligne, "rm", 1) == 0) { // la sauvegarde ne save que les instructions cd, mkdir, touch, cp et rm
-                fputs(ligne, sauvegarde);
+    else if (argc == 1) {
+        char instruction[INSTRUCTION_MAX_LEN_STRING];
+        printf("Tapez 'exit' pour quitter.\n");
+        while (1) {
+            printf("> ");
+            fflush(stdout);
+            if (fgets(instruction, INSTRUCTION_MAX_LEN_STRING, stdin) == NULL) {
+                break;
             }
+            if (strncmp(instruction, "exit", 4) == 0 && (instruction[4] == '\0' || instruction[4] == '\n' || instruction[4] == ' ')) {
+                break;
+            }
+            execute(instruction, ctx, fichier_journal);
         }
-
-        fclose(fichier_instr);
-        fclose(sauvegarde);
-
-        executer_fichier(ctx, argv[2], fichier_journal);
-    }
-    else if (argc == 4 && (strcmp(argv[1], "-L") == 0)) {
-        executer_fichier(ctx, argv[2], fichier_journal); // exec du fichier sauvegarde
-        executer_fichier(ctx, argv[3], fichier_journal); // exec du fichier courant
     }
     else {
-        printf(RED "./programme [-S/-L] [nom sauvegarde] instructions.txt\n" reset);
+        printf(RED "usage: ./programme [instructions.txt]\n" reset);
         if (ctx != NULL) {
             free(ctx);
         }

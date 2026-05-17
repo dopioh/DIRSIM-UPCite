@@ -1,0 +1,8 @@
+mkdir docs
+touch racine
+ls
+ls -a
+ls -f
+ls -d
+ls docs
+pwd

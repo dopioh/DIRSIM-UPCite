@@ -9,13 +9,21 @@
 #include "include/parseur.h"
 #include "include/erreur.h"
 
-#include "../instruction/print.h"
+#include "../instruction/instr_print.h"
 #include "../instruction/instr_touch.h"
 #include "../instruction/instr_mkdir.h"
+#include "../instruction/instr_cp.h"
 #include "../instruction/instr_ls.h"
 #include "../instruction/instr_cd.h"
 #include "../instruction/instr_pwd.h"
 #include "../instruction/instr_find.h"
+#include "../instruction/instr_rm.h"
+#include "../instruction/instr_cp.h"
+#include "../instruction/instr_mv.h"
+#include "../instruction/instr_man.h"
+#include "../instruction/instr_history.h"
+#include "../instruction/instr_load.h"
+#include "../instruction/instr_save.h"
 
 #define MAX_ARGS 5
 
@@ -59,6 +67,8 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
     instruction_log[sizeof(instruction_log) - 1] = '\0';
     instruction_log[strcspn(instruction_log, "\n")] = '\0'; // strcspn renvoi l'indice du premier \n ce qui permet de le remplacer par \0 pour finir la ligne
 
+    instruction[strcspn(instruction, "\r\n")] = '\0';
+
     char* args[MAX_ARGS];
     int arg_count = parseur(instruction, args, MAX_ARGS);
     int erreur = SUCCESS;
@@ -76,7 +86,7 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
         switch (args[0][0]) { // on peut pas switch avec un string
             case 'p':
                 if (strcmp(args[0], "print") == 0) {
-                    if (arg_count == 1) print();
+                    if (arg_count == 1) erreur = instr_print(ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else if (strcmp(args[0], "pwd") == 0) {
                     if (arg_count == 1) erreur = instr_pwd(ctx);
@@ -103,51 +113,108 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
                     } else if (arg_count == 3) {
                         erreur = instr_mkdir(args[1], args[2], ctx);
                     } else erreur = ERR_SYNTAXE_COMMANDE;
+                } else if (strcmp(args[0], "man") == 0) {
+                    if (arg_count == 1) {
+                        erreur = instr_man(NULL, ctx);
+                    } else if (arg_count == 2) {
+                        erreur = instr_man(args[1], ctx);
+                    } else erreur = ERR_SYNTAXE_COMMANDE;
+                } else if (strcmp(args[0], "mv") == 0) {
+                    if (arg_count == 3) {
+                        erreur = instr_mv(args[1], args[2], ctx);
+                    } else erreur = ERR_SYNTAXE_COMMANDE;
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;
                 }
                 break;
             case 'c':
                 if (strcmp(args[0], "cd") == 0) {
-                    if (arg_count == 2) erreur = instr_cd(args[1], ctx);
+                    if (arg_count == 1) erreur = instr_cd(NULL, ctx);
+                    else if (arg_count == 2) erreur = instr_cd(args[1], ctx);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else if (strcmp(args[0], "cp") == 0) {
+                    if (arg_count == 3) erreur = instr_cp(args[1], args[2], ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;
                 }
                 break;
             case 'l':
-                if (strcmp(args[0], "ls") != 0) {
-                    erreur = ERR_COMMANDE_INCONNUE;
-                    break;
-                }
-                if (arg_count == 1) {
-                    erreur = instr_ls(ctx, NULL);
-                } else if (arg_count == 2 && strcmp(args[1], "-a") == 0) {
-                    erreur = instr_ls_cache(ctx, NULL);
-                } else if (arg_count == 2 && (strcmp(args[1], "-f") == 0 || strcmp(args[1], "-fichier") == 0)) {
-                    erreur = instr_ls_fichier(ctx, NULL);
-                } else if (arg_count == 2 && (strcmp(args[1], "-d") == 0 || strcmp(args[1], "-dossier") == 0)) {
-                    erreur = instr_ls_dossier(ctx, NULL);
-                } else if (arg_count == 2 &&
-                           strcmp(args[1], "-a") != 0 &&
-                           strcmp(args[1], "-f") != 0 &&
-                           strcmp(args[1], "-fichier") != 0 &&
-                           strcmp(args[1], "-d") != 0 &&
-                           strcmp(args[1], "-dossier") != 0) {
-                    erreur = instr_ls(ctx, args[1]);
-                } else if (arg_count == 3 && strcmp(args[1], "-a") == 0) {
-                    erreur = instr_ls_cache(ctx, args[2]);
-                } else if (arg_count == 3 && (strcmp(args[1], "-f") == 0 || strcmp(args[1], "-fichier") == 0)) {
-                    erreur = instr_ls_fichier(ctx, args[2]);
-                } else if (arg_count == 3 && (strcmp(args[1], "-d") == 0 || strcmp(args[1], "-dossier") == 0)) {
-                    erreur = instr_ls_dossier(ctx, args[2]);
+                if (strcmp(args[0], "load") == 0) {
+                    if (arg_count == 2) erreur = instr_load(args[1], ctx, fichier_journal);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else if (strcmp(args[0], "ls") == 0) {
+                    if (arg_count == 1) {
+                        erreur = instr_ls(ctx, NULL);
+                    } else if (arg_count == 2 && strcmp(args[1], "-a") == 0) {
+                        erreur = instr_ls_cache(ctx, NULL);
+                    } else if (arg_count == 2 && (strcmp(args[1], "-f") == 0 || strcmp(args[1], "-fichier") == 0)) {
+                        erreur = instr_ls_fichier(ctx, NULL);
+                    } else if (arg_count == 2 && (strcmp(args[1], "-d") == 0 || strcmp(args[1], "-dossier") == 0)) {
+                        erreur = instr_ls_dossier(ctx, NULL);
+                    } else if (arg_count == 2 &&
+                               strcmp(args[1], "-a") != 0 &&
+                               strcmp(args[1], "-f") != 0 &&
+                               strcmp(args[1], "-fichier") != 0 &&
+                               strcmp(args[1], "-d") != 0 &&
+                               strcmp(args[1], "-dossier") != 0) {
+                        erreur = instr_ls(ctx, args[1]);
+                    } else if (arg_count == 3 && strcmp(args[1], "-a") == 0) {
+                        erreur = instr_ls_cache(ctx, args[2]);
+                    } else if (arg_count == 3 && (strcmp(args[1], "-f") == 0 || strcmp(args[1], "-fichier") == 0)) {
+                        erreur = instr_ls_fichier(ctx, args[2]);
+                    } else if (arg_count == 3 && (strcmp(args[1], "-d") == 0 || strcmp(args[1], "-dossier") == 0)) {
+                        erreur = instr_ls_dossier(ctx, args[2]);
+                    } else {
+                        erreur = ERR_SYNTAXE_COMMANDE;
+                    }
                 } else {
-                    erreur = ERR_SYNTAXE_COMMANDE;
+                    erreur = ERR_COMMANDE_INCONNUE;
                 }
                 break;
             case 'f':
                 if (strcmp(args[0], "find") == 0) {
-                    if (arg_count == 4) erreur = instr_find(ctx, args[1], args[2], args[3]);
+                    if (arg_count == 4) {
+                        erreur = instr_find(ctx, args[1], args[2], args[3]);
+                    } else if (arg_count == 2) {
+                        int err_fichier = instr_find(ctx, ".", "fichier", args[1]);
+                        int err_dossier = instr_find(ctx, ".", "dossier", args[1]);
+
+                        if (err_fichier == ERR_AUCUN_RESULTAT && err_dossier == ERR_AUCUN_RESULTAT) {
+                            erreur = ERR_AUCUN_RESULTAT;
+                        } else if (err_fichier == SUCCESS || err_dossier == SUCCESS) {
+                            erreur = SUCCESS;
+                        } else if (err_fichier != ERR_AUCUN_RESULTAT) {
+                            erreur = err_fichier;
+                        } else if (err_dossier != ERR_AUCUN_RESULTAT) {
+                            erreur = err_dossier;
+                        }
+                    } else {
+                        erreur = ERR_SYNTAXE_COMMANDE;
+                    }
+                } else {
+                    erreur = ERR_COMMANDE_INCONNUE;
+                }
+                break;
+            case 'h':
+                if (strcmp(args[0], "history") == 0) {
+                    if (arg_count == 1) erreur = instr_history(ctx);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else {
+                    erreur = ERR_COMMANDE_INCONNUE;
+                }
+                break;
+            case 'r':
+                if (strcmp(args[0], "rm") == 0) {
+                    if (arg_count == 2) erreur = instr_rm(args[1], ctx);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else {
+                    erreur = ERR_COMMANDE_INCONNUE;
+                }
+                break;
+            case 's':
+                if (strcmp(args[0], "save") == 0) {
+                    if (arg_count == 2) erreur = instr_save(args[1], ctx);
                     else erreur = ERR_SYNTAXE_COMMANDE;
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;
@@ -176,6 +243,10 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
             fprintf(fichier_journal, "%s | echec | code=%d | %s\n", instruction_log, erreur, message);
         }
         fflush(fichier_journal); // force l'ecriture immediatement dans le fichier journal
+    }
+
+    if (instruction_log[0] != '\0') {
+        history_ajouter(instruction_log);
     }
 
     return 0;

@@ -1,0 +1,9 @@
+mkdir p1
+mkdir p2
+cd p1
+touch a
+cd /
+cp /p1/a /p2/b
+find b
+mv /p2/b /p2/c
+find c

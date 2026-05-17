@@ -1,0 +1,5 @@
+load tests/load_source_07.txt
+ls
+find fromload
+find inside
+print
