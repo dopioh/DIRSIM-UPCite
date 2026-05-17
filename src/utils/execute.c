@@ -112,7 +112,9 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
                         erreur = instr_mkdir(args[1], args[2], ctx);
                     } else erreur = ERR_SYNTAXE_COMMANDE;
                 } else if (strcmp(args[0], "man") == 0) {
-                    if (arg_count == 2) {
+                    if (arg_count == 1) {
+                        erreur = instr_man(NULL, ctx);
+                    } else if (arg_count == 2) {
                         erreur = instr_man(args[1], ctx);
                     } else erreur = ERR_SYNTAXE_COMMANDE;
                 } else if (strcmp(args[0], "mv") == 0) {
@@ -167,8 +169,24 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
                 break;
             case 'f':
                 if (strcmp(args[0], "find") == 0) {
-                    if (arg_count == 4) erreur = instr_find(ctx, args[1], args[2], args[3]);
-                    else erreur = ERR_SYNTAXE_COMMANDE;
+                    if (arg_count == 4) {
+                        erreur = instr_find(ctx, args[1], args[2], args[3]);
+                    } else if (arg_count == 2) {
+                        int err_fichier = instr_find(ctx, ".", "fichier", args[1]);
+                        int err_dossier = instr_find(ctx, ".", "dossier", args[1]);
+
+                        if (err_fichier == ERR_AUCUN_RESULTAT && err_dossier == ERR_AUCUN_RESULTAT) {
+                            erreur = ERR_AUCUN_RESULTAT;
+                        } else if (err_fichier == SUCCESS || err_dossier == SUCCESS) {
+                            erreur = SUCCESS;
+                        } else if (err_fichier != ERR_AUCUN_RESULTAT) {
+                            erreur = err_fichier;
+                        } else if (err_dossier != ERR_AUCUN_RESULTAT) {
+                            erreur = err_dossier;
+                        }
+                    } else {
+                        erreur = ERR_SYNTAXE_COMMANDE;
+                    }
                 } else {
                     erreur = ERR_COMMANDE_INCONNUE;
                 }

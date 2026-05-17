@@ -1,0 +1,6 @@
+ls | succes | 0.000033
+man ls | succes | 0.000041
+man mv | succes | 0.000042
+ls | succes | 0.000044
+man | succes | 0.000070
+ls | succes | 0.000022

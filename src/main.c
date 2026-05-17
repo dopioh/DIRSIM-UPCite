@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
     ctx->noeud_racine = noeud_racine;
     ctx->noeud_courant = noeud_racine;
 
-    // creation du fichier logs.txt
+    // creation du fichier journaux.txt
     FILE* fichier_journal;
     fichier_journal = fopen("journaux.txt", "r");
     
