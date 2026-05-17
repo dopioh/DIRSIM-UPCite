@@ -21,6 +21,7 @@
 #include "../instruction/instr_cp.h"
 #include "../instruction/instr_mv.h"
 #include "../instruction/instr_man.h"
+#include "../instruction/instr_history.h"
 
 #define MAX_ARGS 5
 
@@ -172,6 +173,14 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
                     erreur = ERR_COMMANDE_INCONNUE;
                 }
                 break;
+            case 'h':
+                if (strcmp(args[0], "history") == 0) {
+                    if (arg_count == 1) erreur = instr_history(ctx);
+                    else erreur = ERR_SYNTAXE_COMMANDE;
+                } else {
+                    erreur = ERR_COMMANDE_INCONNUE;
+                }
+                break;
             case 'r':
                 if (strcmp(args[0], "rm") == 0) {
                     if (arg_count == 2) erreur = instr_rm(args[1], ctx);
@@ -203,6 +212,10 @@ int execute(char* instruction, contexte* ctx, FILE* fichier_journal) {
             fprintf(fichier_journal, "%s | echec | code=%d | %s\n", instruction_log, erreur, message);
         }
         fflush(fichier_journal); // force l'ecriture immediatement dans le fichier journal
+    }
+
+    if (instruction_log[0] != '\0') {
+        history_ajouter(instruction_log);
     }
 
     return 0;
