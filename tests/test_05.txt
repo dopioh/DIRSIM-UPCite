@@ -1,0 +1,10 @@
+mkdir alpha
+cd alpha
+mkdir beta
+touch test
+cd beta
+touch test
+cd /
+find test
+find / fichier test
+find / dossier beta

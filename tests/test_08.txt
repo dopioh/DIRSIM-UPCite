@@ -1,0 +1,8 @@
+mkdir one
+cd one
+touch file
+cd /
+cp /one /copyone
+ls
+rm copyone
+ls

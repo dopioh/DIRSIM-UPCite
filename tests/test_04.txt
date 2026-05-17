@@ -1,0 +1,8 @@
+mkdir src
+cd src
+touch fichier1
+cp fichier1 copie1
+mv copie1 copie2
+ls
+rm copie2
+ls

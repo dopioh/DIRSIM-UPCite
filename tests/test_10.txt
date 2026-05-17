@@ -1,0 +1,9 @@
+man
+man ls
+mkdir z
+cd z
+touch t
+history
+save tests/out_history_10.txt
+pwd
+print

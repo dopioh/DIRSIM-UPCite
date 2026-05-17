@@ -1,0 +1,10 @@
+mkdir a
+mkdir b
+cd a
+mkdir c
+touch f1
+cd ..
+cd b
+touch f2
+cd /
+print

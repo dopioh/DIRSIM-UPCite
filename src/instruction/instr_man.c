@@ -9,7 +9,7 @@ void afficher_liste_commandes() {
     printf("========== MANUEL DES COMMANDES ==========\n");
     printf("Utilisation: man <commande>\n");
     printf("Commandes disponibles:\n");
-    printf("  print, pwd, cd, touch, mkdir, ls, find, cp, mv, rm, history, man\n");
+    printf("  print, pwd, cd, touch, mkdir, ls, find, cp, mv, rm, history, load, save, man\n");
 }
 
 void afficher_man_cd() {
@@ -113,6 +113,22 @@ void afficher_man_history() {
     printf("  history\n");
 }
 
+void afficher_man_load() {
+    printf("load - executer des commandes depuis un fichier externe\n");
+    printf("Syntaxe:\n");
+    printf("  load <fichier>\n");
+    printf("Details:\n");
+    printf("  - execute chaque ligne du fichier.\n");
+}
+
+void afficher_man_save() {
+    printf("save - sauvegarder les commandes tappées dans un fichier\n");
+    printf("Syntaxe:\n");
+    printf("  save <fichier>\n");
+    printf("Details:\n");
+    printf("  - ecrit les commandes qui impactent l'arborescence, une par ligne.\n");
+}
+
 void afficher_man_man() {
     printf("man - manuel des commandes\n");
     printf("Syntaxes:\n");
@@ -150,6 +166,10 @@ int afficher_man(char* commande) {
         afficher_man_touch();
     } else if (strcmp(commande, "history") == 0) {
         afficher_man_history();
+    } else if (strcmp(commande, "load") == 0) {
+        afficher_man_load();
+    } else if (strcmp(commande, "save") == 0) {
+        afficher_man_save();
     } else if (strcmp(commande, "man") == 0) {
         afficher_man_man();
     } else {
